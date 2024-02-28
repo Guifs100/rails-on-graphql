@@ -70,3 +70,6 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+gem "graphql", "~> 2.2"
+gem "graphiql-rails", group: :development
