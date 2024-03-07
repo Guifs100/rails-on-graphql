@@ -6,3 +6,24 @@ services:
       - .:/rails-on-graphql/
     ports:
       - "3003:3003"
+    networks:
+    - policy-service
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      # - RABBITMQ_USERNAME=user
+      # - RABBITMQ_PASSWORD=password
+      - RABBITMQ_HOSTNAME=rabbitmq
+    networks:
+      - policy-service
+networks:
+  default:
+  policy-service:
+    external: true
+
