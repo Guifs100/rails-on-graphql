@@ -2,11 +2,11 @@ require 'sneakers'
 require 'bunny'
 require 'json'
 
-class CreatePolicyProcessor
-  def self.publisher(message, queue)
+class CreatePolicyPublisher
+  def self.publish(message, queue_name)
     ch = conn.create_channel
-    queue = ch.queue('create_policy', durable: true)
-    ch.default_exchange.publish(message, routing_key: queue.name)
+    queue = ch.queue(queue_name, durable: true)
+    ch.default_exchange.publish(message.to_json, routing_key: queue.name)
     ch.close
   end
 

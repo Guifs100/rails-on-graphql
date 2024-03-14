@@ -5,10 +5,10 @@ module Mutations
     field :result, String, null: true
 
     def resolve(policy:)
-      p '++++++++++++++++++++++++++++++++++'
-      p 'Passei Aqui'
-      p '++++++++++++++++++++++++++++++++++'
+      CreatePolicyPublisher.publish(policy.to_h, 'create_policy')
       { "result" => "OK" }
+    rescue StandardError => e
+      raise GraphQL::ExecutionError, e.message
     end
   end
 end
