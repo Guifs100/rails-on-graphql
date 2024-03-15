@@ -1,4 +1,5 @@
 require 'net/http'
+require 'open-uri'
 
 module Resolvers
   class PoliciesResolver < Resolvers::BaseResolver
@@ -6,10 +7,13 @@ module Resolvers
     argument :limit, Integer, required: false
 
     def resolve(limit:)
-      response = Net::HTTP.get(URI('http://web:3000/policies'))
+      uri = URI.parse('http://web:3000/policies')
+      params = { limit: limit }
+      uri.query = URI.encode_www_form(params)
+      response = uri.open.read
       Rails.logger.info(response)
-      parsed_response = JSON.parse(response, symbolize_names: true)
-      parsed_response
+
+      JSON.parse(response)
     end
   end
 end
