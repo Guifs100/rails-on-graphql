@@ -17,17 +17,15 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
+    container_name: rabbitmq
     ports:
       - '5672:5672'
       - '15672:15672'
-    environment:
-      # - RABBITMQ_USERNAME=user
-      # - RABBITMQ_PASSWORD=password
-      - RABBITMQ_HOSTNAME=rabbitmq
+    env_file:
+      - .env
     networks:
       - policy-service
 networks:
   default:
   policy-service:
     external: true
-
