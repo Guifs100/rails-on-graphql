@@ -6,7 +6,7 @@ module Resolvers
     argument :id, ID, required: true
 
     def resolve(id:)
-      response = Net::HTTP.get(URI("http://web:3000/policies/#{id}"))
+      response = Net::HTTP.get(URI("http://web:3005/policies/#{id}"))
       Rails.logger.info(response)
       JSON.parse(response)
     end

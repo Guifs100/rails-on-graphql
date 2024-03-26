@@ -12,9 +12,9 @@ class CreatePolicyPublisher
 
   def self.conn
     @conn ||= Bunny.new(
-      # username: 'user',
-      # password: 'password',
-      hostname: 'rabbitmq'
-    ).tap(&:start)
+      username: ENV['RABBITMQ_DEFAULT_USER'],
+      password: ENV['RABBITMQ_DEFAULT_PASS'],
+      hostname: ENV['RABBITMQ_HOSTNAME']
+    ).start
   end
 end

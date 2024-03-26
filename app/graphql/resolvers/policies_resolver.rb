@@ -7,7 +7,7 @@ module Resolvers
     argument :limit, Integer, required: false
 
     def resolve(limit:)
-      uri = URI.parse('http://web:3000/policies')
+      uri = URI.parse('http://web:3005/policies')
       params = { limit: limit }
       uri.query = URI.encode_www_form(params)
       response = uri.open.read
