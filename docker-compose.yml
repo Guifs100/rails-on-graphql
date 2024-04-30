@@ -4,6 +4,8 @@ services:
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3003 -b '0.0.0.0'"
     image: graphql_web
     container_name: graphql_web
+    env_file:
+      - .env
     volumes:
       - .:/rails-on-graphql/
     ports:
