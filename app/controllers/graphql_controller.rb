@@ -8,7 +8,7 @@ class GraphqlController < ApplicationController
 
   def execute
     jwt_token = request.headers['Authorization']&.split(' ')&.last
-    decoded_token = jwt_decodification(jwt_token)
+    jwt_decodification(jwt_token)
 
     variables = prepare_variables(params[:variables])
     query = params[:query]
