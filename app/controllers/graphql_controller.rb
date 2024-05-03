@@ -7,6 +7,9 @@ class GraphqlController < ApplicationController
   protect_from_forgery with: :null_session
 
   def execute
+    jwt_token = request.headers['Authorization']&.split(' ')&.last
+    jwt_decodification(jwt_token)
+
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
